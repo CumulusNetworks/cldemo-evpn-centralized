@@ -1,0 +1,34 @@
+---
+
+- hosts: network
+  become: yes
+  pre_tasks:
+    # To prevent trying this demo on unsupported version, define the minimum Cumulus Linux
+    # Release supported by this demo.
+    - name: Verify Minimum Software Version
+      assert:
+        that: "{{ansible_lsb.release | version_compare('3.5', '>=') }}"
+        msg: >
+          "Cumulus Linux version must be 3.5 or later.
+          Version {{ansible_lsb.release}} detected"
+  roles:
+    - copy_interfaces
+    - copy_frr_daemons
+    - restart_switches
+    - mv_ntp_mgmt_vrf
+      
+  tasks:
+    - name: copy FRR conf
+      copy: src=config/{{ansible_hostname}}/frr.conf dest=/etc/frr/
+    - name: reload networking
+      command: ifreload -a
+    - name: reload frr
+      service: name=frr state=restarted
+      
+- hosts: servers
+  user: cumulus
+  become: yes
+  become_method: sudo
+  roles:
+    - copy-int-reboot-servers
+    
