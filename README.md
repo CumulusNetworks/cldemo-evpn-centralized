@@ -38,7 +38,7 @@ Ubuntu 16.04
 
 ## Topology ##
 
-This demo runs on a spine-leaf topology with four attached hosts. The ansible playbook deploy.yml requires an out-of-band management network that provides access to eth0 on all of the in-band devices. 
+This demo runs on a spine-leaf topology with four attached hosts. The ansible playbook run-demo.yml requires an out-of-band management network that provides access to eth0 on all of the in-band devices. 
 
 ![EVPN Demo Topology](https://github.com/CumulusNetworks/cldemo-evpn-centralized/blob/master/cldemo-evpn-centralized.png)
 
