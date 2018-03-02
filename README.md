@@ -17,7 +17,7 @@ Before running this demo, install VirtualBox and Vagrant. The currently supporte
     git clone https://github.com/cumulusnetworks/cldemo-vagrant
     cd cldemo-vagrant
     vagrant up oob-mgmt-server oob-mgmt-switch 
-    vagrant up leaf01 leaf02 leaf03 leaf04 spine01 spine02 exit01 internet server01 server02 server03 server04
+    vagrant up leaf01 leaf02 leaf03 leaf04 spine01 spine02 exit01 exit02 internet server01 server02 server03 server04
     vagrant ssh oob-mgmt-server
     sudo su - cumulus
     git clone https://github.com/CumulusNetworks/cldemo-evpn-centralized
