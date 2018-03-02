@@ -1,37 +1,12 @@
-# cldemo-evpn-symmetric
+# cldemo-evpn-centralized
 
-This demo shows one approach of running VXLAN Routing with EVPN.  It uses the distributed architecture with symmetric IRB model. (Note Cumulus supports asymmetric model as well).  Using this technique employs the VXLAN Routing directly on the ToR, using EVPN for both VLAN/VXLAN bridging as well as VXLAN and external routing.  
+This Github repository contains the configuration files necessary for setting up EVPN using Cumulus Linux and FRR on the Reference Topology.  It includes the VXLAN Routing with the Centralized Architecture
 
-In this demo, each server is configured on a VLAN, with a total of two VLANs for the setup.  MLAG is also set up between servers and the leafs.
+This demo is equivalent to the Centralized Architecture Deployment scenario in the [Cumulus VXLAN Routing and EVPN whitepaper](https://cumulusnetworks.com/learn/web-scale-networking-resources/whitepapers/Cumulus-Networks-White-Paper-EVPN.pdf) 
 
-Each Leaf is configured with an anycast gateway, and the servers default gateways are pointing towards the corresponding leaf switch IP gateway address.  We create two tenant VNIs (corresponding to two VLANs/VXLANs), which are bridged to corresponding VLANs.
+The flatfiles in this repository will set up a BGP unnumbered underlay along with an EVPN overlay between the leafs, spines and exit router (i.e. border leaf).  The servers will have a basic IPv4 with bonding (MLAG) to the leafs.  Server01 and 03 are in one VLAN/VXLAN, and servers 02 and 04 are in a different VLAN/VXLAN.  VTEPS are configured on all leaf switches and the exit switch with all VNIs.  Exit01 and Exit02 are configured as the centralized VXLAN Routers and are running MLAG between them. The SVIs are configured on the Exit routers and  the VRR virtual address is advertised as the default gateway to the Leaf switches via the EVPN BGP extended community. 
 
-Additionally, we create a L3VNI that provides for the inter-VXLAN routing (using Type 2 routes), as well as to the external "internet" using EVPN Type 5 routes.  All VNIs are located in VRF1. 
-
-We advertise a default route via the BGP ipv4 address family originating from the "internet" router into the exit switch's VRF1.  The exit switches then advertise the default route to the ToRs via a EVPN Type 5 route.  All other inter-VXLAN routing occurs via Type 2 routes learned over the L3VNI.
-
-The Network Topology is depicted below.
-
-
-## Topology ##
-![EVPN Symmetric Model Demo](https://github.com/CumulusNetworks/cldemo-evpn-symmetric/blob/master/evpn_symmetric_demo.png)
-
-
-
-
-Software in Use:
-----------------
-
-On Spines, Leafs, Exits and Internet:
-
- - Cumulus v3.5.0
-
-On Servers:
-
- - Ubuntu 16.04 
-  
-
-
+The internet router is advertising a default route to the exit router.  The internet router has IP address 172.16.1.1 as a loopback address.
 
 
 Quickstart: Run the demo
@@ -42,24 +17,44 @@ Before running this demo, install VirtualBox and Vagrant. The currently supporte
     git clone https://github.com/cumulusnetworks/cldemo-vagrant
     cd cldemo-vagrant
     vagrant up oob-mgmt-server oob-mgmt-switch 
-    vagrant up leaf01 leaf02 leaf03 leaf04 spine01 spine02 exit01 exit02 internet server01 server02 server03 server04
+    vagrant up leaf01 leaf02 leaf03 leaf04 spine01 spine02 exit01 internet server01 server02 server03 server04
     vagrant ssh oob-mgmt-server
-    git clone https://github.com/CumulusNetworks/cldemo-evpn-symmetric
-    cd cldemo-config-evpn-symmetric
-    ansible-playbook run-demo.yml
+    sudo su - cumulus
+    git clone https://github.com/CumulusNetworks/cldemo-evpn-centralized
+    cd cldemo-evpn-centralized
+    ansible-playbook deploy.yml
     ssh server01
     ping 172.16.1.1 
 
 
+Software in Use
+------------------------
+**Spines, Leafs, Exit and Internet:**
+      Cumulus v3.5.0
 
-   
-    
+**On Servers:**
+Ubuntu 16.04
 
-Viewing the Results
+
+## Topology ##
+
+This demo runs on a spine-leaf topology with four attached hosts. The ansible playbook deploy.yml requires an out-of-band management network that provides access to eth0 on all of the in-band devices. 
+
+![EVPN Demo Topology](https://github.com/CumulusNetworks/cldemo-evpn-centralized/blob/master/cldemo-evpn-centralized.png)
+
+ 
+## Viewing the Results ##
+
+
+
+
+ 
+
+Viewing the Results {WIP}
 -------
 
 
-View the EVPN Routing Table:
+View the EVPN Routing Table on a Leaf:
 
    
 
