@@ -22,7 +22,7 @@ Before running this demo, install VirtualBox and Vagrant. The currently supporte
     sudo su - cumulus
     git clone https://github.com/CumulusNetworks/cldemo-evpn-centralized
     cd cldemo-evpn-centralized
-    ansible-playbook deploy.yml
+    ansible-playbook run-demo.yml
     ssh server01
     ping 172.16.1.1 
 
