@@ -45,71 +45,79 @@ This demo runs on a spine-leaf topology with four attached hosts. The ansible pl
  
 ## Viewing the Results ##
 
-
-
-
- 
-
-Viewing the Results {WIP}
 -------
+    cumulus@leaf01:mgmt-vrf:~$ net show bgp l2vpn evpn route rd 10.0.0.42:3
+    EVPN type-2 prefix: [2]:[ESI]:[EthTag]:[MAClen]:[MAC]
+    EVPN type-3 prefix: [3]:[EthTag]:[IPlen]:[OrigIP]
+    EVPN type-5 prefix: [5]:[ESI]:[EthTag]:[IPlen]:[IP]
+    
+    BGP routing table entry for 10.0.0.42:3:[2]:[0]:[0]:[48]:[44:38:39:00:00:27]:[32]:[10.2.4.12]
+    Paths: (1 available, best #1)
+      Advertised to non peer-group peers:
+      spine02(swp52)
+      Route [2]:[0]:[0]:[48]:[44:38:39:00:00:27]:[32]:[10.2.4.12] VNI 24
+      65020 65042
+        10.0.0.142 from spine02(swp52) (10.0.0.22)
+          Origin IGP, localpref 100, valid, external, bestpath-from-AS 65020, best
+          Extended Community: RT:65042:24 ET:8 Default Gateway
+          AddPath ID: RX 0, TX 56
+          Last update: Thu Mar  8 19:58:56 2018
+    
+    BGP routing table entry for 10.0.0.42:3:[2]:[0]:[0]:[48]:[44:38:39:00:00:27]:[128]:[fe80::4638:39ff:fe00:27]
+    Paths: (1 available, best #1)
+      Advertised to non peer-group peers:
+      spine02(swp52)
+      Route [2]:[0]:[0]:[48]:[44:38:39:00:00:27]:[128]:[fe80::4638:39ff:fe00:27] VNI 24
+      65020 65042
+        10.0.0.142 from spine02(swp52) (10.0.0.22)
+          Origin IGP, localpref 100, valid, external, bestpath-from-AS 65020, best
+          Extended Community: RT:65042:24 ET:8 Default Gateway
+          AddPath ID: RX 0, TX 62
+          Last update: Thu Mar  8 19:58:56 2018
+    
+    BGP routing table entry for 10.0.0.42:3:[2]:[0]:[0]:[48]:[44:39:39:ff:00:24]:[32]:[10.2.4.1]
+    Paths: (1 available, best #1)
+      Advertised to non peer-group peers:
+      spine02(swp52)
+      Route [2]:[0]:[0]:[48]:[44:39:39:ff:00:24]:[32]:[10.2.4.1] VNI 24
+      65020 65042
+        10.0.0.142 from spine02(swp52) (10.0.0.22)
+          Origin IGP, localpref 100, valid, external, bestpath-from-AS 65020, best
+          Extended Community: RT:65042:24 ET:8 Default Gateway
+          AddPath ID: RX 0, TX 60
+          Last update: Thu Mar  8 19:58:56 2018
+    
+    BGP routing table entry for 10.0.0.42:3:[2]:[0]:[0]:[48]:[44:39:39:ff:00:24]:[128]:[fe80::4639:39ff:feff:24]
+    Paths: (1 available, best #1)
+      Advertised to non peer-group peers:
+      spine02(swp52)
+      Route [2]:[0]:[0]:[48]:[44:39:39:ff:00:24]:[128]:[fe80::4639:39ff:feff:24] VNI 24
+      65020 65042
+        10.0.0.142 from spine02(swp52) (10.0.0.22)
+          Origin IGP, localpref 100, valid, external, bestpath-from-AS 65020, best
+          Extended Community: RT:65042:24 ET:8 Default Gateway
+          AddPath ID: RX 0, TX 58
+          Last update: Thu Mar  8 19:58:56 2018
+    
+    BGP routing table entry for 10.0.0.42:3:[3]:[0]:[32]:[10.0.0.142]
+    Paths: (1 available, best #1)
+      Advertised to non peer-group peers:
+      spine02(swp52)
+      Route [3]:[0]:[32]:[10.0.0.142]
+      65020 65042
+        10.0.0.142 from spine02(swp52) (10.0.0.22)
+          Origin IGP, localpref 100, valid, external, bestpath-from-AS 65020, best
+          Extended Community: RT:65042:24 ET:8
+          AddPath ID: RX 0, TX 64
+          Last update: Thu Mar  8 19:58:56 2018
+    
+    
+    Displayed 5 prefixes (5 paths) with this RD
+
+    
 
 
-View the EVPN Routing Table on a Leaf:
 
-   
-
-     cumulus@leaf01:mgmt-vrf:~$ net show bgp evpn route
-     BGP table version is 17, local router ID is 10.0.0.11
-     Status codes: s suppressed, d damped, h history, * valid, > best, i - internal
-     Origin codes: i - IGP, e - EGP, ? - incomplete
-     EVPN type-2 prefix: [2]:[ESI]:[EthTag]:[MAClen]:[MAC]:[IPlen]:[IP]
-     EVPN type-3 prefix: [3]:[EthTag]:[IPlen]:[OrigIP]
-     Network          Next Hop            Metric LocPrf Weight Path
-     Route Distinguisher: 10.0.0.11:2
-     *> [2]:[0]:[0]:[48]:[44:38:39:00:00:03]
-                     10.0.0.112                         32768 i                           
-     *> [2]:[0]:[0]:[48]:[44:38:39:00:00:03]:[32]:[10.1.3.101]
-                     10.0.0.112                         32768 i
-     *> [2]:[0]:[0]:[48]:[44:38:39:00:00:03]:[128]:[fe80::4638:39ff:fe00:3]
-                     10.0.0.112                         32768 i
-     *> [2]:[0]:[0]:[48]:[46:38:39:00:00:03]
-                     10.0.0.112                         32768 i
-     *> [2]:[0]:[0]:[48]:[46:38:39:00:00:17]
-     *> [3]:[0]:[32]:[10.0.0.112]
-                     10.0.0.112                         32768 i
-     Route Distinguisher: 10.0.0.11:3
-     **-SNIP-**
-     Route Distinguisher: 10.0.0.41:2
-     *  [5]:[0]:[0]:[0.0.0.0]
-                        10.0.0.41                              0 65020 65041 25253 i
-     *> [5]:[0]:[0]:[0.0.0.0]
-                        10.0.0.41                              0 65020 65041 25253 i
-     Route Distinguisher: 10.0.0.42:2
-     *  [5]:[0]:[0]:[0.0.0.0]
-                        10.0.0.42                              0 65020 65042 25253 i
-     *> [5]:[0]:[0]:[0.0.0.0]
-                        10.0.0.42                              0 65020 65042 25253 i
-                                    
-                                   
- 
-
-
-
-
-
-Check the Kernel routing table on the leaf in the VRF:
-
-    cumulus@leaf01:mgmt-vrf:~$ ip route show vrf vrf1
-    default  proto bgp  metric 20
-    nexthop via 10.0.0.42  dev vlan4001 weight 1 onlink
-    nexthop via 10.0.0.41  dev vlan4001 weight 1 onlink
-    unreachable default  metric 4278198272
-    10.1.3.0/24 dev vlan13  proto kernel  scope link  src 10.1.3.11
-    10.1.3.0/24 dev vlan13-v0  proto kernel  scope link  src 10.1.3.1
-    10.1.3.103 via 10.0.0.134 dev vlan4001  proto bgp  metric 20 onlink
-    10.2.4.0/24 dev vlan24  proto kernel  scope link  src 10.2.4.11
-    10.2.4.0/24 dev vlan24-v0  proto kernel  scope link  src 10.2.4.1
-    10.2.4.104 via 10.0.0.134 dev vlan4001  proto bgp  metric 20 onlink
    
 
 Ping from Server01 to Server04 on (different VLANs and racks), and ping from server01 to Internet Router
