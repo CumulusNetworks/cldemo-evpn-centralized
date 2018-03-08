@@ -46,7 +46,7 @@ This demo runs on a spine-leaf topology with four attached hosts. The ansible pl
 ## Viewing the Results ##
 
 -------
-Observe the Default Gateway Community getting distributed with the type 2 default gateway routes:
+Observe the Default Gateway Community getting distributed with the type 2 routes to the default gateway:
 
     cumulus@leaf01:mgmt-vrf:~$ net show bgp l2vpn evpn route rd 10.0.0.42:3
     EVPN type-2 prefix: [2]:[ESI]:[EthTag]:[MAClen]:[MAC]
@@ -85,7 +85,7 @@ Observe the Default Gateway Community getting distributed with the type 2 defaul
       65020 65042
         10.0.0.142 from spine02(swp52) (10.0.0.22)
           Origin IGP, localpref 100, valid, external, bestpath-from-AS 65020, best
-          Extended Community: RT:65042:24 ET:8 Default Gateway
+          Extended Community: RT:65042:24 ET:8 **Default Gateway**
           AddPath ID: RX 0, TX 60
           Last update: Thu Mar  8 19:58:56 2018
     
