@@ -9,8 +9,7 @@ iface lo inet loopback
 
 # Management interface
 auto eth0
-iface eth0 inet static
-    address 192.168.0.12/24 
+iface eth0 inet dhcp
     alias management interface
     vrf mgmt
 
