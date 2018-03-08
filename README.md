@@ -1,6 +1,6 @@
 # cldemo-evpn-centralized
 
-This Github repository contains the configuration files necessary for setting up EVPN using Cumulus Linux and FRR on the Reference Topology.  It includes the VXLAN Routing with the Centralized Architecture
+This Github repository contains the configuration files necessary for setting up EVPN using Cumulus Linux and FRR on the Reference Topology.  It includes VXLAN/VLAN bridging with BGP EVPN Control Plane along with the VXLAN Routing using the Centralized Architecture.
 
 This demo is equivalent to the Centralized Architecture Deployment scenario in the [Cumulus VXLAN Routing and EVPN whitepaper](https://cumulusnetworks.com/learn/web-scale-networking-resources/whitepapers/Cumulus-Networks-White-Paper-EVPN.pdf) 
 
