@@ -30,7 +30,7 @@ Before running this demo, install VirtualBox and Vagrant. The currently supporte
 Software in Use
 ------------------------
 **Spines, Leafs, Exit and Internet:**
-      Cumulus v3.5.0
+      Cumulus v3.5.2
 
 **On Servers:**
 Ubuntu 16.04
