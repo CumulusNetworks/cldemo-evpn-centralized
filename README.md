@@ -85,7 +85,7 @@ Observe the Default Gateway Community getting distributed with the type 2 routes
       65020 65042
         10.0.0.142 from spine02(swp52) (10.0.0.22)
           Origin IGP, localpref 100, valid, external, bestpath-from-AS 65020, best
-          Extended Community: RT:65042:24 ET:8 **Default Gateway**
+          Extended Community: RT:65042:24 ET:8 Default Gateway
           AddPath ID: RX 0, TX 60
           Last update: Thu Mar  8 19:58:56 2018
     
