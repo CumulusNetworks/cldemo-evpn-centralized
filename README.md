@@ -2,8 +2,6 @@
 
 This Github repository contains the configuration files necessary for setting up EVPN using Cumulus Linux and FRR on the Reference Topology.  It includes VXLAN/VLAN bridging with BGP EVPN Control Plane along with the VXLAN Routing using the Centralized Architecture.
 
-This demo is equivalent to the Centralized Architecture Deployment scenario in the [Cumulus VXLAN Routing and EVPN whitepaper](https://cumulusnetworks.com/learn/web-scale-networking-resources/whitepapers/Cumulus-Networks-White-Paper-EVPN.pdf) 
-
 The flatfiles in this repository will set up a BGP unnumbered underlay along with an EVPN overlay between the leafs, spines and exit router (i.e. border leaf).  The servers will have a basic IPv4 with bonding (MLAG) to the leafs.  Server01 and 03 are in one VLAN/VXLAN, and servers 02 and 04 are in a different VLAN/VXLAN.  VTEPS are configured on all leaf switches and the exit switch with all VNIs.  Exit01 and Exit02 are configured as the centralized VXLAN Routers and are running MLAG between them. The SVIs are configured on the Exit routers and  the VRR virtual address is advertised as the default gateway to the Leaf switches via the EVPN BGP extended community. 
 
 The internet router is advertising a default route to the exit router.  The internet router has IP address 172.16.1.1 as a loopback address.
